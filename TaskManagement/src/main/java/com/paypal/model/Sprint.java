@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 
 import org.springframework.boot.autoconfigure.web.WebProperties.Resources.Chain.Strategy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +30,7 @@ public class Sprint {
 	private Integer sprintNo;
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "sprint")
+	
 	private List<Task> tasklist=new ArrayList<Task>();
 	
 }

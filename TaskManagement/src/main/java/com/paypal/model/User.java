@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,11 +27,13 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	
+	private Integer id;
 	@NotNull
 	private String name;
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "assignee")
+	@JsonIgnore
 	private List<Task> tasklist=new ArrayList<Task>();
 	
 	

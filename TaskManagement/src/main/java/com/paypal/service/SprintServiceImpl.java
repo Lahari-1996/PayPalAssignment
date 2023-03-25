@@ -26,7 +26,7 @@ public class SprintServiceImpl implements SprintService{
 		return sprintRepo.save(sprint);
 	}
 	@Override
-	public Sprint addTaskToSprint(Integer taskID, Integer sprintID) throws TaskException, SprintException {
+	public List<Task> addTaskToSprint(Integer taskID, Integer sprintID) throws TaskException, SprintException {
 		// TODO Auto-generated method stub
 		Optional<Sprint> opt=sprintRepo.findById(sprintID);
 		
@@ -41,10 +41,15 @@ public class SprintServiceImpl implements SprintService{
 		{
 			throw new SprintException("No task found with given id");
 		}
+		opt2.get().setSprint(opt.get());
+		taskRepo.save(opt2.get());
+		Sprint spr=opt.get();
+		spr.getTasklist().add(opt2.get());
 		
-		opt.get().getTasklist().add(opt2.get());
+		Sprint sprints=sprintRepo.save(spr);
+		return sprints.getTasklist();
 		
-		return sprintRepo.save(opt.get());
+	
 	}
 	@Override
 	public List<Task> viewAllTaskInSprint(Integer sprintID) throws SprintException, TaskException {

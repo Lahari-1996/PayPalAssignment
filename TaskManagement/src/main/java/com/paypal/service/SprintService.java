@@ -11,6 +11,6 @@ public interface SprintService {
 
 	public Sprint createSprint(Sprint sprint)throws SprintException;
 	
-	public Sprint addTaskToSprint(Integer taskID,Integer sprintID) throws TaskException,SprintException;
+	public List<Task> addTaskToSprint(Integer taskID,Integer sprintID) throws TaskException,SprintException;
 	public List<Task> viewAllTaskInSprint(Integer sprintID) throws SprintException,TaskException;
 }
